@@ -35,6 +35,7 @@ class CustomerServiceTest {
         assertEquals(1, customer.getId());
         assertEquals("Ivan", customer.getName());
         assertEquals("ivan@mail.ru", customer.getEmail());
+        assertEquals("IvanCorp", customer.getCompanyName());
         assertEquals(18, customer.getAge());
     }
 
@@ -44,11 +45,13 @@ class CustomerServiceTest {
                 .name("test")
                 .email("test@mail.ru")
                 .age(19)
+                .companyName("IvanCorp")
                 .build();
         CustomerReadDto customer = customerServiceImpl.createCustomer(customerDto);
         assertNotNull(customer);
         assertEquals("test", customer.getName());
         assertEquals("test@mail.ru", customer.getEmail());
+        assertEquals("IvanCorp", customer.getCompanyName());
         assertEquals(19, customer.getAge());
     }
 
@@ -58,12 +61,14 @@ class CustomerServiceTest {
                 .name("test")
                 .email("test@mail.ru")
                 .age(19)
+                .companyName("IvanCorp")
                 .build();
         CustomerReadDto customer = customerServiceImpl.updateCustomer(CUSTOMER_ID, customerDto);
         assertNotNull(customer);
         assertEquals(CUSTOMER_ID, customer.getId());
         assertEquals("test", customer.getName());
         assertEquals("test@mail.ru", customer.getEmail());
+        assertEquals("IvanCorp", customer.getCompanyName());
         assertEquals(19, customer.getAge());
     }
 

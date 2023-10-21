@@ -41,6 +41,7 @@ class CustomerControllerTest {
                 .andExpect(jsonPath("$.id").value(CUSTOMER_ID))
                 .andExpect(jsonPath("$.name").value("Ivan"))
                 .andExpect(jsonPath("$.email").value("ivan@mail.ru"))
+                .andExpect(jsonPath("$.companyName").value("IvanCorp"))
                 .andExpect(jsonPath("$.age").value(18));
     }
 
@@ -58,6 +59,7 @@ class CustomerControllerTest {
                 .name("test")
                 .email("test@mail.ru")
                 .age(19)
+                .companyName("IvanCorp")
                 .build();
         String requestJson = objectMapper.writeValueAsString(customerDto);
         mockMvc.perform(post("/api/v1/customers")
@@ -66,7 +68,24 @@ class CustomerControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.name").value("test"))
                 .andExpect(jsonPath("$.email").value("test@mail.ru"))
+                .andExpect(jsonPath("$.companyName").value("IvanCorp"))
                 .andExpect(jsonPath("$.age").value(19));
+    }
+
+    @Test
+    void createWithNotExistingCompany() throws Exception {
+        CustomerCreateEditDto customerDto = CustomerCreateEditDto.builder()
+                .name("test")
+                .email("test@mail.ru")
+                .age(19)
+                .companyName("error")
+                .build();
+        String requestJson = objectMapper.writeValueAsString(customerDto);
+        mockMvc.perform(post("/api/v1/customers")
+                        .contentType(APPLICATION_JSON)
+                        .content(requestJson))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.message").exists());
     }
 
     @Test
@@ -131,6 +150,7 @@ class CustomerControllerTest {
         CustomerCreateEditDto customerDto = CustomerCreateEditDto.builder()
                 .name("test")
                 .email("test@mail.ru")
+                .companyName("IvanCorp")
                 .age(19)
                 .build();
         String requestJson = objectMapper.writeValueAsString(customerDto);
