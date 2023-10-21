@@ -28,7 +28,7 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
     protected ErrorDto entityNotFoundExceptionHandler(EntityNotFoundException ex) {
         log.warn("Entity Not Found Exception: {}", ex.getMessage());
         return ErrorDto.builder()
-                .status(HttpStatus.BAD_REQUEST.value())
+                .status(HttpStatus.NOT_FOUND.value())
                 .message(ex.getMessage())
                 .build();
     }

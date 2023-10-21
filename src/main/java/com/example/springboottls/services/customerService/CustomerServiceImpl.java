@@ -72,8 +72,8 @@ public class CustomerServiceImpl implements CustomerService {
         Company company = companyRepository
                 .findByName(customerDto.getCompanyName())
                 .orElseThrow(() -> new CompanyNotFoundException(String.format("Company [%s] does not exist", customerDto.getCompanyName())));
-        customerCreateEditMapper.map(customerDto, customer);
         customer.setCompany(company);
+        customerCreateEditMapper.map(customerDto, customer);
         customerRepository.save(customer);
         return customerReadMapper.map(customer);
     }
