@@ -1,5 +1,5 @@
 server:
-  port: ${SERVER_PORT:8080}
+  port: ${SERVER_PORT:443}
   ssl:
     key-store: classpath:self-signed-certificate.jks
     key-store-type: pkcs12
@@ -13,7 +13,6 @@ spring:
     username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
-
   jpa:
     properties:
       hibernate:
