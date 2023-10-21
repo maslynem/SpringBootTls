@@ -20,17 +20,17 @@ class CustomerServiceTest {
     private static final Long CUSTOMER_ID = 1L;
 
     @Autowired
-    private CustomerService customerService;
+    private CustomerServiceImpl customerServiceImpl;
 
     @Test
     void findAll() {
-        List<CustomerReadDto> allCustomers = customerService.findAll();
+        List<CustomerReadDto> allCustomers = customerServiceImpl.findAll();
         assertThat(allCustomers).hasSize(7);
     }
 
     @Test
     void findCustomerById() {
-        CustomerReadDto customer = customerService.findCustomerById(CUSTOMER_ID);
+        CustomerReadDto customer = customerServiceImpl.findCustomerById(CUSTOMER_ID);
         assertEquals(1, customer.getId());
         assertEquals("Ivan", customer.getName());
         assertEquals("ivan@mail.ru", customer.getEmail());
@@ -44,7 +44,7 @@ class CustomerServiceTest {
                 .email("test@mail.ru")
                 .age(19)
                 .build();
-        CustomerReadDto customer = customerService.createCustomer(customerDto);
+        CustomerReadDto customer = customerServiceImpl.createCustomer(customerDto);
         assertNotNull(customer);
         assertEquals("test", customer.getName());
         assertEquals("test@mail.ru", customer.getEmail());
@@ -58,7 +58,7 @@ class CustomerServiceTest {
                 .email("test@mail.ru")
                 .age(19)
                 .build();
-        CustomerReadDto customer = customerService.updateCustomer(CUSTOMER_ID, customerDto);
+        CustomerReadDto customer = customerServiceImpl.updateCustomer(CUSTOMER_ID, customerDto);
         assertNotNull(customer);
         assertEquals(CUSTOMER_ID, customer.getId());
         assertEquals("test", customer.getName());
@@ -68,9 +68,9 @@ class CustomerServiceTest {
 
     @Test
     void deleteById() {
-        CustomerReadDto customerById = customerService.findCustomerById(CUSTOMER_ID);
+        CustomerReadDto customerById = customerServiceImpl.findCustomerById(CUSTOMER_ID);
         assertNotNull(customerById);
-        customerService.deleteById(CUSTOMER_ID);
-        assertThrows(CustomerNotFoundException.class, () -> customerService.findCustomerById(CUSTOMER_ID));
+        customerServiceImpl.deleteById(CUSTOMER_ID);
+        assertThrows(CustomerNotFoundException.class, () -> customerServiceImpl.findCustomerById(CUSTOMER_ID));
     }
 }
