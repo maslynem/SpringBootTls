@@ -32,7 +32,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerReadDto findCustomerById(final Long id) {
+    public CustomerReadDto findCustomerById(Long id) {
         return customerRepository.findById(id)
                 .map(customerReadMapper::map)
                 .orElseThrow(() -> new CustomerNotFoundException(String.format("Customer with id '%d' not found", id)));
@@ -52,7 +52,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerReadDto createCustomer(final CustomerCreateEditDto customerDto) {
+    public CustomerReadDto createCustomer(CustomerCreateEditDto customerDto) {
         Company company = companyRepository.findByName(customerDto.getCompanyName())
                 .orElseThrow(() -> new CompanyNotFoundException(String.format("Company [%s] does not exist", customerDto.getCompanyName())));
         Customer customer = customerCreateEditMapper.map(customerDto);
@@ -67,7 +67,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerReadDto updateCustomer(final Long id, final CustomerCreateEditDto customerDto) {
+    public CustomerReadDto updateCustomer(Long id, CustomerCreateEditDto customerDto) {
         Customer customer = customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(String.format("Customer with id '%d' not found", id)));
         Company company = companyRepository
                 .findByName(customerDto.getCompanyName())

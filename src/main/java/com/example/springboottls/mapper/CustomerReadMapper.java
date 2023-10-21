@@ -15,7 +15,7 @@ public class CustomerReadMapper {
         this.mapper = mapper;
     }
 
-    public CustomerReadDto map(final Customer customer) {
+    public CustomerReadDto map(Customer customer) {
         return mapper.map(customer, CustomerReadDto.class);
     }
 

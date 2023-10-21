@@ -17,7 +17,6 @@ CREATE TABLE customer
 );
 
 
-
 --changeset maslynem:2
 
 INSERT INTO company(name)

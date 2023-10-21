@@ -15,11 +15,11 @@ public class CustomerCreateEditMapper {
         this.mapper = mapper;
     }
 
-    public Customer map(final CustomerCreateEditDto customerCreateEditDto) {
+    public Customer map(CustomerCreateEditDto customerCreateEditDto) {
         return mapper.map(customerCreateEditDto, Customer.class);
     }
 
-    public void map(final CustomerCreateEditDto customerCreateEditDto, Customer customer) {
+    public void map(CustomerCreateEditDto customerCreateEditDto, Customer customer) {
         mapper.map(customerCreateEditDto, customer);
     }
 }

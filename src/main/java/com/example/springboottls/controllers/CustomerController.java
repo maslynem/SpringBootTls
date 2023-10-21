@@ -33,7 +33,7 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public CustomerReadDto findCustomerById(@PathVariable final Long id) {
+    public CustomerReadDto findCustomerById(@PathVariable Long id) {
         return customerService.findCustomerById(id);
     }
 
