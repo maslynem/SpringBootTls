@@ -14,4 +14,5 @@ public class CustomerReadDto {
     private String name;
     private String email;
     private Integer age;
+    private String companyName;
 }

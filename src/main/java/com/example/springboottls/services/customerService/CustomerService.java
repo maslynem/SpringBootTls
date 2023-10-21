@@ -1,4 +1,4 @@
-package com.example.springboottls.services;
+package com.example.springboottls.services.customerService;
 
 import com.example.springboottls.dto.customerDto.CustomerCreateEditDto;
 import com.example.springboottls.dto.customerDto.CustomerReadDto;

@@ -4,6 +4,7 @@ import com.example.springboottls.IntegrationsTestConfiguration;
 import com.example.springboottls.dto.customerDto.CustomerCreateEditDto;
 import com.example.springboottls.dto.customerDto.CustomerReadDto;
 import com.example.springboottls.exceptions.CustomerNotFoundException;
+import com.example.springboottls.services.customerService.CustomerServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

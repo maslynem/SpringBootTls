@@ -1,27 +1,31 @@
-package com.example.springboottls.services;
+package com.example.springboottls.services.customerService;
 
 import com.example.springboottls.dto.customerDto.CustomerCreateEditDto;
 import com.example.springboottls.dto.customerDto.CustomerReadDto;
+import com.example.springboottls.entities.Company;
 import com.example.springboottls.entities.Customer;
+import com.example.springboottls.exceptions.CompanyNotFoundException;
 import com.example.springboottls.exceptions.CustomerNotFoundException;
 import com.example.springboottls.mapper.CustomerCreateEditMapper;
 import com.example.springboottls.mapper.CustomerReadMapper;
+import com.example.springboottls.repository.CompanyRepository;
 import com.example.springboottls.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
+    private final CompanyRepository companyRepository;
     private final CustomerReadMapper customerReadMapper;
     private final CustomerCreateEditMapper customerCreateEditMapper;
 
     @Autowired
-    public CustomerServiceImpl(CustomerRepository customerRepository, CustomerReadMapper customerReadMapper, CustomerCreateEditMapper customerCreateEditMapper) {
+    public CustomerServiceImpl(CustomerRepository customerRepository, CompanyRepository companyRepository, CustomerReadMapper customerReadMapper, CustomerCreateEditMapper customerCreateEditMapper) {
         this.customerRepository = customerRepository;
+        this.companyRepository = companyRepository;
         this.customerReadMapper = customerReadMapper;
         this.customerCreateEditMapper = customerCreateEditMapper;
     }
@@ -42,11 +46,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerReadDto createCustomer(final CustomerCreateEditDto customerDto) {
-        return Optional.of(customerDto)
-                .map(customerCreateEditMapper::map)
-                .map(customerRepository::save)
-                .map(customerReadMapper::map)
-                .orElseThrow();
+        Company company = companyRepository.findByName(customerDto.getCompanyName())
+                .orElseThrow(() -> new CompanyNotFoundException(String.format("Company [%s] does not exist", customerDto.getCompanyName())));
+        Customer customer = customerCreateEditMapper.map(customerDto);
+        customer.setCompany(company);
+        customerRepository.save(customer);
+        return customerReadMapper.map(customer);
     }
 
     @Override
@@ -57,7 +62,11 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerReadDto updateCustomer(final Long id, final CustomerCreateEditDto customerDto) {
         Customer customer = customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(String.format("Customer with id '%d' not found", id)));
-        customerCreateEditMapper.map(customerDto,customer);
+        Company company = companyRepository
+                .findByName(customerDto.getCompanyName())
+                .orElseThrow(() -> new CompanyNotFoundException(String.format("Company [%s] does not exist", customerDto.getCompanyName())));
+        customerCreateEditMapper.map(customerDto, customer);
+        customer.setCompany(company);
         customerRepository.save(customer);
         return customerReadMapper.map(customer);
     }

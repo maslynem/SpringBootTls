@@ -23,4 +23,6 @@ public class CustomerCreateEditDto {
     @Min(0)
     @Max(150)
     private Integer age;
+
+    private String companyName;
 }

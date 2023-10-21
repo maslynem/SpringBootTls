@@ -2,7 +2,7 @@ package com.example.springboottls.controllers;
 
 import com.example.springboottls.dto.customerDto.CustomerCreateEditDto;
 import com.example.springboottls.dto.customerDto.CustomerReadDto;
-import com.example.springboottls.services.CustomerService;
+import com.example.springboottls.services.customerService.CustomerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
