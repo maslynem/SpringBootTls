@@ -3,6 +3,7 @@ package com.example.springboottls.controllers;
 import com.example.springboottls.dto.customerDto.CustomerCreateEditDto;
 import com.example.springboottls.dto.customerDto.CustomerReadDto;
 import com.example.springboottls.services.CustomerService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,12 +33,12 @@ public class CustomerController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public CustomerReadDto create(@RequestBody CustomerCreateEditDto customer) {
+    public CustomerReadDto create(@Valid @RequestBody CustomerCreateEditDto customer) {
         return customerService.createCustomer(customer);
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public CustomerReadDto update(@PathVariable("id") Long id, @RequestBody CustomerCreateEditDto user) {
+    public CustomerReadDto update(@PathVariable("id") Long id, @Valid @RequestBody CustomerCreateEditDto user) {
         return customerService.updateCustomer(id, user);
     }
 

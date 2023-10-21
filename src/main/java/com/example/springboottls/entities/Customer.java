@@ -1,6 +1,7 @@
 package com.example.springboottls.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -18,12 +19,19 @@ public class Customer {
     private Long id;
 
     @Column
+    @NotNull(message = "name can not be null")
+    @NotBlank(message = "name can not be blank")
     private String name;
 
     @Column
+    @NotNull(message = "email can not be null")
+    @Email(message = "invalid email")
     private String email;
 
     @Column
+    @NotNull(message = "age can not be null")
+    @Min(0)
+    @Max(150)
     private Integer age;
 
     @Override

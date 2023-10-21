@@ -51,7 +51,8 @@ public class CustomerService {
     }
 
     public CustomerReadDto updateCustomer(final Long id, final CustomerCreateEditDto customerDto) {
-        Customer customer = new Customer(id, customerDto.getName(), customerDto.getEmail(), customerDto.getAge());
+        Customer customer = customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(String.format("Customer with id '%d' not found", id)));
+        customerCreateEditMapper.map(customerDto,customer);
         customerRepository.save(customer);
         return customerReadMapper.map(customer);
     }
