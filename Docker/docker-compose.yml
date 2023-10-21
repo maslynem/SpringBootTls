@@ -9,7 +9,7 @@ services:
     environment:
       DB_URL: jdbc:postgresql://postgres:5432/postgres
     ports:
-      - '443:8080'
+      - '443:443'
 
   postgres:
     image: postgres:15.0
