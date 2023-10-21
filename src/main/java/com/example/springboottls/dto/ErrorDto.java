@@ -1,4 +1,4 @@
-package com.example.springboottls.dto.customerDto;
+package com.example.springboottls.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

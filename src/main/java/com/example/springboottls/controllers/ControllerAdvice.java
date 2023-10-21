@@ -1,6 +1,6 @@
 package com.example.springboottls.controllers;
 
-import com.example.springboottls.dto.customerDto.ErrorDto;
+import com.example.springboottls.dto.ErrorDto;
 import com.example.springboottls.exceptions.CompanyNotFoundException;
 import com.example.springboottls.exceptions.CustomerNotFoundException;
 import com.example.springboottls.exceptions.EntityNotFoundException;
