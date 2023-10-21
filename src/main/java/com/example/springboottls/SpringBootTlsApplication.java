@@ -12,7 +12,6 @@ public class SpringBootTlsApplication {
         SpringApplication.run(SpringBootTlsApplication.class, args);
     }
 
-
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();

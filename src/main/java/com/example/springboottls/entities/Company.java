@@ -24,7 +24,6 @@ public class Company {
     @Column(nullable = false)
     private Long id;
 
-
     @Column(nullable = false)
     @NotNull(message = "name can not be null")
     @NotBlank(message = "name can not be blank")
