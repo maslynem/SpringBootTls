@@ -2,7 +2,6 @@ package com.example.springboottls.controllers;
 
 import com.example.springboottls.dto.customerDto.ErrorDto;
 import com.example.springboottls.exceptions.CustomerNotFoundException;
-import com.example.springboottls.exceptions.RequestException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -22,7 +21,7 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(CustomerNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    protected ErrorDto customerNotFoundExceptionHandler(RequestException ex) {
+    protected ErrorDto customerNotFoundExceptionHandler(CustomerNotFoundException ex) {
         return ErrorDto.builder()
                 .status(HttpStatus.BAD_REQUEST.value())
                 .message(ex.getMessage())
