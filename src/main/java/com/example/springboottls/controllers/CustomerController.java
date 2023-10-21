@@ -26,6 +26,12 @@ public class CustomerController {
         return customerService.findAll();
     }
 
+    @GetMapping(params = {"page", "size"})
+    public List<CustomerReadDto> findAllCustomers(@RequestParam("page") int page,
+                                                  @RequestParam("size") int size) {
+        return customerService.findPaginated(page, size);
+    }
+
     @GetMapping("/{id}")
     public CustomerReadDto findCustomerById(@PathVariable final Long id) {
         return customerService.findCustomerById(id);

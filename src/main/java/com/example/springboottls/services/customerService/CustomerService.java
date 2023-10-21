@@ -10,6 +10,8 @@ public interface CustomerService {
 
     List<CustomerReadDto> findAll();
 
+    List<CustomerReadDto> findPaginated(int page, int size);
+
     CustomerReadDto createCustomer(CustomerCreateEditDto customerDto);
 
     void deleteById(Long id);

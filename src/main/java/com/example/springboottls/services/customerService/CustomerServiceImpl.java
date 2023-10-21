@@ -11,6 +11,7 @@ import com.example.springboottls.mapper.CustomerReadMapper;
 import com.example.springboottls.repository.CompanyRepository;
 import com.example.springboottls.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,6 +43,12 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.findAll().stream()
                 .map(customerReadMapper::map)
                 .toList();
+    }
+
+    @Override
+    public List<CustomerReadDto> findPaginated(int page, int size) {
+        PageRequest pageable = PageRequest.of(page, size);
+        return customerRepository.findAllBy(pageable).stream().map(customerReadMapper::map).toList();
     }
 
     @Override
